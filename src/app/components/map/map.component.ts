@@ -479,7 +479,11 @@ export class MapComponent {
         }
 
         if (this.gamedata.lootBoxes && this.gamedata.lootBoxes.length > 0) {
-            this.addLootBoxes();
+            let hiddenLootBoxes = this.addLootBoxes();
+
+            if (hiddenLootBoxes.length > 0) {
+                markersToHide.push(...hiddenLootBoxes);
+            }
         }
 
         if (this.gamedata.anomalyZones && this.gamedata.anomalyZones.length > 0) {
@@ -495,7 +499,11 @@ export class MapComponent {
         }
 
         if (this.gamedata.stalkers && this.gamedata.stalkers.length > 0) {
-            this.addStalkers();
+            let hiddenStalkers = this.addStalkers();
+
+            if (hiddenStalkers.length > 0) {
+                markersToHide.push(...hiddenStalkers);
+            }
         }
 
         if (this.gamedata.mechanics && this.gamedata.mechanics.length > 0) {
@@ -1369,10 +1377,12 @@ export class MapComponent {
         return [markersToHide, itemsTypes];
     }
 
-    private addLootBoxes() {
+    private addLootBoxes(): any[] {
         let lootBoxType = this.getLootBoxIcon();
+        let hiddenMarkers = this.mapService.getAllHiddenMarkers().filter(x => x.layerName == lootBoxType.uniqueName);
 
         let markers: any[] = [];
+        let markersToHide: any[] = [];
         let index = 0;
 
         for (let lootBox of this.gamedata.lootBoxes) {
@@ -1485,10 +1495,18 @@ export class MapComponent {
             );
 
             lootBoxMarker.on('click', (e: any) => this.mapService.onMarkerClick(e, this.map, this.container, this.bottomSheet, (container, isPopup)=> this.mapService.createLootBoxContent(e.target, container, this.game, this.items, this.gamedata.locations, this.lootBoxConfig, false)));
-            markers.push(lootBoxMarker);
+
+            if (hiddenMarkers.some(x => x.lat == lootBox.z && x.lng == lootBox.x)) {
+                markersToHide.push(lootBoxMarker);
+            }
+            else {
+                markers.push(lootBoxMarker);
+            }
         }
 
         this.addLayerToMap(L.layerGroup(markers), lootBoxType.uniqueName, lootBoxType.ableToSearch);
+
+        return markersToHide;
     }
 
     private addMarks() {
@@ -1920,11 +1938,13 @@ export class MapComponent {
         this.addLayerToMap(L.layerGroup(markers), traderIcon.uniqueName, traderIcon.ableToSearch);
     }
 
-    private addStalkers() {
+    private addStalkers(): any[] {
         let stalkerIcon, stalkerIconDead, stalkerIconQuestItem;
         [stalkerIcon, stalkerIconDead, stalkerIconQuestItem] = this.getStalkersIcon();
+        let hiddenMarkers = this.mapService.getAllHiddenMarkers().filter(x => x.layerName == stalkerIcon.uniqueName);
 
         let markers: any[] = [];
+        let markersToHide: any[] = [];
         let index = 0;
 
         for (let stalker of this.gamedata.stalkers) {
@@ -1987,7 +2007,6 @@ export class MapComponent {
             canvasMarker.properties.name = stalker.profile.name;
             canvasMarker.properties.typeUniqueName = stalkerIcon.uniqueName;
 
-            markers.push(canvasMarker);
             canvasMarker.properties.ableToSearch = false;
             canvasMarker.feature = {};
             canvasMarker.feature.properties = {};
@@ -2021,10 +2040,19 @@ export class MapComponent {
             );
 
             canvasMarker.on('click', (e: any) => this.mapService.onMarkerClick(e, this.map, this.container, this.bottomSheet, (container, isPopup)=> this.mapService.createStalkerContent(e.target, container, this.game, this.items, this.mapConfig, false, !isPopup)));
+
+            if (hiddenMarkers.some(x => x.lat == stalker.z && x.lng == stalker.x)) {
+                markersToHide.push(canvasMarker);
+            }
+            else {
+                markers.push(canvasMarker);
+            }
         }
 
 
         this.addLayerToMap(L.layerGroup(markers), stalkerIcon.uniqueName, stalkerIcon.ableToSearch);
+
+        return markersToHide;
     }
 
     private addMechanics() {

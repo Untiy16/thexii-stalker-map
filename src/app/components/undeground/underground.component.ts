@@ -266,11 +266,23 @@ export class UndergroundComponent {
             markersToHide.push(...hiddenstuffs);
         }
 
-        this.addLootBoxes();
+        let hiddenLootBoxes = this.addLootBoxes();
 
-        this.addAnomalyZones();
+        if (hiddenLootBoxes.length > 0) {
+            markersToHide.push(...hiddenLootBoxes);
+        }
 
-        this.addStalkers();
+        let hiddenAnomalies = this.addAnomalyZones();
+
+        if (hiddenAnomalies.length > 0) {
+            markersToHide.push(...hiddenAnomalies);
+        }
+
+        let hiddenStalkers = this.addStalkers();
+
+        if (hiddenStalkers.length > 0) {
+            markersToHide.push(...hiddenStalkers);
+        }
 
         this.addHiddenMarkers(markersToHide);
 
@@ -598,11 +610,13 @@ export class UndergroundComponent {
         return markersToHide;
     }
 
-    private addStalkers() {
+    private addStalkers(): any[] {
         let stalkerIcon, stalkerIconDead, stalkerIconQuestItem;
         [stalkerIcon, stalkerIconDead, stalkerIconQuestItem] = this.mapComponent.getStalkersIcon();
+        let hiddenMarkers = this.mapService.getAllHiddenMarkers().filter(x => x.layerName == stalkerIcon.uniqueName);
 
         let markers: any[] = [];
+        let markersToHide: any[] = [];
 
         for (let stalker of this.gamedata.stalkers.filter(x => x.locationId == this.location.id)) {
             let icon = stalker.alive ? (stalker.hasUniqueItem ? stalkerIconQuestItem : stalkerIcon) : stalkerIconDead;
@@ -618,7 +632,6 @@ export class UndergroundComponent {
             canvasMarker.properties.stalker = stalker;
             canvasMarker.properties.name = stalker.profile.name;
             canvasMarker.properties.typeUniqueName = stalkerIcon.uniqueName;
-            markers.push(canvasMarker);
             canvasMarker.properties.ableToSearch = false;
             canvasMarker.feature = {};
             canvasMarker.feature.properties = {};
@@ -650,11 +663,20 @@ export class UndergroundComponent {
             );
 
             canvasMarker.on('click', (e: any) => this.mapService.handleStalkerClick(e, this.map, this.container, new BottomSheetWrapperComponent(), this.game, this.items, this.mapConfig, false));
+
+            if (hiddenMarkers.some(x => x.lat == stalker.z && x.lng == stalker.x)) {
+                markersToHide.push(canvasMarker);
+            }
+            else {
+                markers.push(canvasMarker);
+            }
         }
 
         if (markers.length > 0) {
             this.addLayerToMap(L.layerGroup(markers), stalkerIcon.uniqueName, stalkerIcon.ableToSearch);
         }
+
+        return markersToHide;
     }
 
     private addHiddenMarkers(markersToHide: any[]): void {
@@ -671,10 +693,12 @@ export class UndergroundComponent {
         this.addLayerToMap(hiddenLayer, MapComponent.hiddenLayerName);
     }
 
-    private addLootBoxes() {
+    private addLootBoxes(): any[] {
         let lootBoxType = this.mapComponent.getLootBoxIcon();
+        let hiddenMarkers = this.mapService.getAllHiddenMarkers().filter(x => x.layerName == lootBoxType.uniqueName);
 
         let markers: any[] = [];
+        let markersToHide: any[] = [];
 
         for (let lootBox of this.gamedata.lootBoxes.filter(x => x.locationId == this.location.id)) {
             let lootBoxMarker = new this.mapComponent.svgMarker([lootBox.z + this.zShift, lootBox.x + this.xShift], {
@@ -729,12 +753,20 @@ export class UndergroundComponent {
             /*lootBoxMarker.bindPopup((p: any) => this.mapService.createLootBoxPopup(p, this.container, this.game, this.items, this.gamedata.locations, this.lootBoxConfig, true), {
                 minWidth: 300,
             }).openPopup(),*/
+
+            if (hiddenMarkers.some(x => x.lat == lootBox.z && x.lng == lootBox.x)) {
+                markersToHide.push(lootBoxMarker);
+            }
+            else {
                 markers.push(lootBoxMarker);
+            }
         }
 
         if (markers.length > 0) {
             this.addLayerToMap(L.layerGroup(markers), lootBoxType.uniqueName, lootBoxType.ableToSearch);
         }
+
+        return markersToHide;
     }
 
     private addLevelChangers() {
@@ -795,18 +827,19 @@ export class UndergroundComponent {
         this.addLayerToMap(L.layerGroup(markers), levelChangerIcon.uniqueName);
     }
 
-    private addAnomalyZones(): void {
+    private addAnomalyZones(): any[] {
         let anomalyZoneIcon, anomalyZoneNoArtIcon;
         [anomalyZoneIcon, anomalyZoneNoArtIcon] = this.mapComponent.getAnomaliesIcons();
 
         let anomalies: any[] = [];
         let anomaliesNoArt: any[] = [];
         let artefactWays: any[] = [];
+        let markersToHide: any[] = [];
+
+        const defaultType: string = 'anomaly-zone';
+        let hiddenMarkers = this.mapService.getAllHiddenMarkers().filter(x => x.layerName == defaultType);
 
         for (let zone of this.gamedata.anomalyZones.filter(x => x.locationId == this.location.id)) {
-
-            const defaultType: string = 'anomaly-zone';
-
             let canvasMarker;
 
             let hasArtefacts = zone.anomaliySpawnSections != null && zone.anomaliySpawnSections.length > 0;
@@ -833,7 +866,12 @@ export class UndergroundComponent {
                 canvasMarker.properties.typeUniqueName = defaultType;
                 canvasMarker.properties.name = zone.name ? zone.name : defaultType;
 
-                anomalies.push(canvasMarker);
+                if (hiddenMarkers.some(x => x.lat == zone.z && x.lng == zone.x)) {
+                    markersToHide.push(canvasMarker);
+                }
+                else {
+                    anomalies.push(canvasMarker);
+                }
 
                 if (location) {
                     canvasMarker.properties.locationUniqueName = this.location.uniqueName;
@@ -875,6 +913,8 @@ export class UndergroundComponent {
         } catch (e) {
             console.log(e);
         }
+
+        return markersToHide;
     }
 
     private createProperty(
