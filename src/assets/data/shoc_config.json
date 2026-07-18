@@ -84,7 +84,7 @@
     }
   ],
   "minZoom": 0,
-  "maxZoom": 3,
+  "maxZoom": 5,
   "startZoom": 1,
   "globalMapFileName": "global_map.jpg",
   "width": 1024,
