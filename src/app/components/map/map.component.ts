@@ -415,7 +415,7 @@ export class MapComponent {
         var transformation = this.map.options.crs!.transformation;
         console.log(transformation._a, transformation._b, transformation._c, transformation._d);
 
-        this.map.scaleFactor = 1.5;
+        this.map.scaleFactor = 0.6;
 
         this.map.attributionControl!.addAttribution('&copy; <a href="https://stalker-map.online">stalker-map.online</a>');
 
@@ -1012,17 +1012,17 @@ export class MapComponent {
                 /*this._map.eachLayer((layer: any) => {
                     if (layer.properties && layer.properties.itemTypes && layer.properties.itemTypes.length > 0) {
                         const properties = layer.properties;
-                        
+
                         if (properties.itemTypes && Array.isArray(properties.itemTypes) && properties.itemTypes.length > 0) {
                             let hasActiveFilter = false;
-      
+
                             for (let filter of this.activeFilters) {
                               if (properties.itemTypes.some((x: string) => filter.gameCategories.includes(x))) {
                                 hasActiveFilter = true;
                                 break;
                               }
                             }
-                            
+
                             if (hasActiveFilter) {
                                 if (!this._map.hasLayer(layer)) {
                                     this._map.addLayer(layer);
@@ -1351,7 +1351,7 @@ export class MapComponent {
                     });
 
                     stuff.on('click', (e: any) => this.mapService.onMarkerClick(e, this.map, this.container, this.bottomSheet, (container, isPopup)=> this.mapService.createStashContent(e.target, container, this.game, this.items, false, isPopup)));
-        
+
                     if (hiddenMarkers.some(x => x.lat == stuffModel.z && x.lng == stuffModel.x)) {
                         markersToHide.push(stuff);
                     }
@@ -1632,10 +1632,10 @@ export class MapComponent {
                 }
 
                 let circle = L.circle([shape.z, shape.x], {radius: shape.radius, color: type.stroke, fill: type.fill});
-                
+
                 polygons.push(circle);
             }
-            
+
             if (polygons.length > 0) {
                 this.addLayerToMap(L.layerGroup(polygons), type.name, false);
             }
@@ -1922,7 +1922,7 @@ export class MapComponent {
             );
 
             canvasMarker.on('click', (e: any) => this.mapService.onMarkerClick(e, this.map, this.container, this.bottomSheet, (container, isPopup)=> this.mapService.createTraderContent(e.target, this.gamedata.traders, container, this.game, this.items, this.mapConfig, isPopup)));
-        
+
         }
 
         this.addLayerToMap(L.layerGroup(markers), traderIcon.uniqueName, traderIcon.ableToSearch);
@@ -2105,7 +2105,7 @@ export class MapComponent {
                     offset: [0, 50],
                 }
             );
-            
+
             canvasMarker.on('click', (e: any) => this.mapService.onMarkerClick(e, this.map, this.container, this.bottomSheet, (container, isPopup)=> this.mapService.createMechanicContent(e.target, container, this.game, this.items, this.mapConfig, this.upgrades, this.upgradeProperties)));
         }
 
@@ -2646,7 +2646,7 @@ export class MapComponent {
                     popup.setLatLng(levelChanger._latlng);
                     return;
                     /*this.openedUndergroundPopup.levelChanger.closePopup();
-          
+
                     levelChanger.openPopup();*/
                 }
             }
@@ -3032,7 +3032,7 @@ export class MapComponent {
             }),
             radius: 2,
             keepMapSize: true
-        } 
+        }
 
         let levelChangerDirection: { name: string, icon: any, radius: number, keepMapSize: boolean }[] = [];
 
