@@ -1,5 +1,6 @@
 @for (box of boxes; track box) {
     @if (box.items && box.items.length > 0) {
+        <div class="items-title">{{ 'loot-box-100-percent-items' | translate}}</div>
         <div class="inventory">
             @for (stuffItem of box.items; track stuffItem) {
                 <div tooltip [component]="itemTooltipComponent" [componentData]="{item: stuffItem.item}" class="inventory-item inventory-item-width-{{stuffItem.item.width}} inventory-item-height-{{stuffItem.item.height}}">
@@ -20,7 +21,7 @@
                         @if (stuffItem.item.hasSilencer && stuffItem.item.silencerX > -1000 && stuffItem.item.silencerY > -1000) {
                             <div class="wpn_addon silencer" [style.left.px]="stuffItem.item.silencerX" [style.top.px]="stuffItem.item.silencerY"></div>
                         }
-                        
+
                         @if (stuffItem.item.hasGrenadeLauncher && stuffItem.item.grenadeLauncherX > -1000 && stuffItem.item.grenadeLauncherY > -1000) {
                             <div class="wpn_addon grenade-launcher" [style.left.px]="stuffItem.item.grenadeLauncherX" [style.top.px]="stuffItem.item.grenadeLauncherY"></div>
                         }
