@@ -60,7 +60,7 @@ export class HeaderComponent {
     }
 
     public ngOnDestroy() {
-        this.resizeObserver.disconnect();
+        this.resizeObserver?.disconnect();
     }
 
     public changeLanguage(event: any): void {

@@ -248,21 +248,10 @@ export class MapComponent {
             })
 
 
-        let body = document.body,
-            html = document.documentElement;
-
-        let height = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        );
-
         let wrapper = document.getElementById('map-wrapper');
 
         if (wrapper) {
-            let wrapperHeight = height - wrapper.offsetTop - 10;
+            let wrapperHeight = window.innerHeight - wrapper.offsetTop - 10;
             document.documentElement.style.setProperty(
                 '--wrapper-height',
                 `${wrapperHeight}px`
