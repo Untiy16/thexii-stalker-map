@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 #map-wrapper {
   position: relative;
   border: 1px solid white;
@@ -20,7 +22,7 @@
 
 .leaflet-tooltip {
   border: 11px solid !important;
-  border-image: url(/assets/images/svg/interface/map-info-solid.svg) 11 stretch stretch !important;
+  border-image: url(#{$asset-base}images/svg/interface/map-info-solid.svg) 11 stretch stretch !important;
   border-image-slice: 11 fill !important;
   background-size: contain !important;
   background-color: transparent !important;
@@ -107,23 +109,23 @@ color: white !important;
   min-height: 100%;
   max-height: 100%;
   object-fit: cover;
-  background-image: url(/assets/images/items/ui_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/ui_icon_equipment.png)
 }
 
 .inventory-item-image.shoc {
-  background-image: url(/assets/images/items/shoc_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/shoc_icon_equipment.png)
 }
 
 .inventory-item-image.cs {
-  background-image: url(/assets/images/items/cs_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/cs_icon_equipment.png)
 }
 
 .inventory-item-image.cop {
-  background-image: url(/assets/images/items/cop_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/cop_icon_equipment.png)
 }
 
 .wpn_addon {
-  background-image: url(/assets/images/items/ui_icon_equipment.png);
+  background-image: url(#{$asset-base}images/items/ui_icon_equipment.png);
   position: absolute;
 }
 
@@ -156,7 +158,7 @@ color: white !important;
 }
 
 .inventory-item-upgrade {
-  background-image: url(/assets/images/items/upgrade.svg);
+  background-image: url(#{$asset-base}images/items/upgrade.svg);
   background-repeat: round;
   width: 25px;
   height: 100%;

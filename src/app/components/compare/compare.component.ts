@@ -7,6 +7,7 @@ import { ItemUpgrade, UpgradeProperty, UpgradeSelectedEventModel } from '../../m
 import { ItemPropertyNumberComponent } from "../mechanic/item-property-number/item-property-number.component";
 import { TranslateModule } from '@ngx-translate/core';
 import { Item } from '../../models/item.model';
+import { getAssetUrl } from '../../utils/app-url';
 
 @Component({
     selector: 'app-compare',
@@ -97,7 +98,7 @@ export class CompareComponent {
     private async loadUpgradeProperties(game: string): Promise<void> {
         if (game != 'shoc') {
             return new Promise(async (resolve, reject) => {
-                await fetch(`/assets/data/${game}/upgrade_properties.json`)
+                await fetch(getAssetUrl(`data/${game}/upgrade_properties.json`))
                     .then((response) => {
                         if (response.ok) {
                             response.json().then((config: UpgradeProperty[]) => {
@@ -115,7 +116,7 @@ export class CompareComponent {
     private async loadUpgrades(game: string): Promise<void> {
         if (game != 'shoc') {
             return new Promise(async (resolve, reject) => {
-                await fetch(`/assets/data/${game}/upgrades.json`)
+                await fetch(getAssetUrl(`data/${game}/upgrades.json`))
                     .then((response) => {
                         if (response.ok) {
                             response.json().then((config: ItemUpgrade[]) => {

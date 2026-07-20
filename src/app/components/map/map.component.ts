@@ -27,6 +27,7 @@ import { HiddenMarker } from '../../models/hidden-marker.model';
 import { CompareComponent } from '../compare/compare.component';
 import { isDevMode } from '@angular/core';
 import { Game } from '../../models/game.model';
+import { getAssetUrl } from '../../utils/app-url';
 import { BottomSheetWrapperComponent } from "../bottom-sheet-wrapper/bottom-sheet-wrapper.component";
 import { L, asLatLngBounds, asLatLngExpressions, asStalkerLayerGroup, asStalkerMap, findLayerMarker, hasLevelChangerProperties, pixelBounds, pixelCenter, StalkerCustomLayersControl, StalkerLayerGroup, StalkerLocationsLayer, StalkerMap, StalkerMarker, StalkerSearchControl } from '../../leaflet/leaflet-setup';
 
@@ -220,19 +221,19 @@ export class MapComponent {
             this.loadLocales(i.lang);
         });
 
-        fetch(`/assets/data/${this.game.uniqueName}/map.json`)
+        fetch(getAssetUrl(`data/${this.game.uniqueName}/map.json`))
             .then((response) => {
                 if (response.ok) {
                     response.json()
                         .then((gamedata: Map) => {
-                            fetch(`/assets/data/${this.game.uniqueName}_config.json`)
+                            fetch(getAssetUrl(`data/${this.game.uniqueName}_config.json`))
                                 .then((response) => response.json())
                                 .then((gameConfig: MapConfig) => {
                                     this.loadMap(gamedata, gameConfig);
                                 })
                                 .catch((error) => {
                                     if (this.gamedata == null) {
-                                        fetch(`/assets/data/${this.game.gameStyle}_config.json`)
+                                        fetch(getAssetUrl(`data/${this.game.gameStyle}_config.json`))
                                             .then((response) => response.json())
                                             .then((gameConfig: MapConfig) => {
                                                 this.loadMap(gamedata, gameConfig);
@@ -291,7 +292,7 @@ export class MapComponent {
     }
 
     private async loadItems(): Promise<void> {
-        await fetch(`/assets/data/${this.game.uniqueName}/items.json`)
+        await fetch(getAssetUrl(`data/${this.game.uniqueName}/items.json`))
             .then((response) => {
                 if (response.ok) {
                     response.json()
@@ -306,7 +307,7 @@ export class MapComponent {
 
     private async loadLootBoxConfig(): Promise<void> {
         if (this.game.gameStyle != 'cop') {
-            await fetch(`/assets/data/${this.game.uniqueName}/lootBoxConfig.json`)
+            await fetch(getAssetUrl(`data/${this.game.uniqueName}/lootBoxConfig.json`))
                 .then((response) => {
                     if (response.ok) {
                         response.json().then((config: LootBoxConfig) => {
@@ -321,7 +322,7 @@ export class MapComponent {
 
     private async loadUpgrades(): Promise<void> {
         if (this.game.gameStyle != 'shoc') {
-            await fetch(`/assets/data/${this.game.uniqueName}/upgrades.json`)
+            await fetch(getAssetUrl(`data/${this.game.uniqueName}/upgrades.json`))
                 .then((response) => {
                     if (response.ok) {
                         response.json().then((config: ItemUpgrade[]) => {
@@ -336,7 +337,7 @@ export class MapComponent {
 
     private async loadUpgradeProperties(): Promise<void> {
         if (this.game.gameStyle != 'shoc') {
-            await fetch(`/assets/data/${this.game.uniqueName}/upgrade_properties.json`)
+            await fetch(getAssetUrl(`data/${this.game.uniqueName}/upgrade_properties.json`))
                 .then((response) => {
                     if (response.ok) {
                         response.json().then((config: UpgradeProperty[]) => {
@@ -350,7 +351,7 @@ export class MapComponent {
     }
 
     private async loadLocales(language: string): Promise<void> {
-        await fetch(`/assets/data/${this.game.uniqueName}/${this.translate.currentLang}.json`)
+        await fetch(getAssetUrl(`data/${this.game.uniqueName}/${this.translate.currentLang}.json`))
             .then((response) => {
                 if (response.ok) {
                     response.json().then((locales: any) => {
@@ -362,7 +363,7 @@ export class MapComponent {
             })
 
 
-        fetch(`/assets/data/${this.game.uniqueName}/locale_import.json`)
+        fetch(getAssetUrl(`data/${this.game.uniqueName}/locale_import.json`))
             .then((response) => {
                 if (response.ok) {
                     response.json().then((locales: any) => {
@@ -373,7 +374,7 @@ export class MapComponent {
 
                                 if (!(importLocales == null || importLocales.length == 0)) {
 
-                                    fetch(`/assets/data/${game}/${this.translate.currentLang}.json`)
+                                    fetch(getAssetUrl(`data/${game}/${this.translate.currentLang}.json`))
                                         .then((response) => {
                                             if (response.ok) {
                                                 response.json().then((locales: any) => {
@@ -437,7 +438,7 @@ export class MapComponent {
 
         const bounds = pixelBounds(this.gamedata.heightInPixels, this.gamedata.widthInPixels);
 
-        L.imageOverlay(`/assets/images/maps/${this.game.gameStyle}/${gameConfig.globalMapFileName}`, bounds).addTo(this.map);
+        L.imageOverlay(getAssetUrl(`images/maps/${this.game.gameStyle}/${gameConfig.globalMapFileName}`), bounds).addTo(this.map);
         this.map.fitBounds(bounds);
 
         this.map.setMaxBounds(bounds);
@@ -1120,14 +1121,14 @@ export class MapComponent {
             let locationImage = '';
 
             if (location.image != null) {
-                locationImage = `/assets/images/maps/${this.game.gameStyle}/${location.image}`;
+                locationImage = getAssetUrl(`images/maps/${this.game.gameStyle}/${location.image}`);
             }
             else {
                 if (location.x1 == 0 && location.x2 == 0 && location.y1 == 0 && location.y2 == 0) {
                     continue;
                 }
 
-                locationImage = `/assets/images/maps/${this.game.gameStyle}/map_${location.uniqueName}.png`;
+                locationImage = getAssetUrl(`images/maps/${this.game.gameStyle}/map_${location.uniqueName}.png`);
             }
 
             const locationBounds = asLatLngBounds([
@@ -1867,7 +1868,7 @@ export class MapComponent {
             icon: new this.svgIcon({
                 iconSize: [4, 4],
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/trader.svg',
+                iconUrl: getAssetUrl('images/svg/marks/trader.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -1880,7 +1881,7 @@ export class MapComponent {
             icon:  new this.svgIcon({
                 iconSize: [4, 4],
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/medic.svg',
+                iconUrl: getAssetUrl('images/svg/marks/medic.svg'),
                 iconSizeInit: [1.5, 1.5],
                 iconAnchor: [0, 0],
             }),
@@ -2065,7 +2066,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/tech.svg',
+                iconUrl: getAssetUrl('images/svg/marks/tech.svg'),
                 iconSizeInit: [1.5, 1.5],
                 iconAnchor: [0, 0],
             }),
@@ -2133,7 +2134,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/sub-location.svg',
+                iconUrl: getAssetUrl('images/svg/marks/sub-location.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -2152,7 +2153,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/smart_terrain_default.svg',
+                iconUrl: getAssetUrl('images/svg/marks/smart_terrain_default.svg'),
                 iconSizeInit: [1.75, 1.75],
                 iconAnchor: [0, 0],
             }),
@@ -2165,7 +2166,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/smart_terrain_territory.svg',
+                iconUrl: getAssetUrl('images/svg/marks/smart_terrain_territory.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -2178,7 +2179,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/smart_terrain_resource.svg',
+                iconUrl: getAssetUrl('images/svg/marks/smart_terrain_resource.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -2191,7 +2192,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/monsters.svg',
+                iconUrl: getAssetUrl('images/svg/marks/monsters.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -2235,7 +2236,7 @@ export class MapComponent {
                                     iconSize: [4, 4],
                                     className: 'mark-container stalker-mark-3',
                                     animate: false,
-                                    iconUrl: '/assets/images/svg/factions/duty.svg',
+                                    iconUrl: getAssetUrl('images/svg/factions/duty.svg'),
                                     iconSizeInit: [2, 2],
                                     iconAnchor: [0, 0],
                                 }),
@@ -2250,7 +2251,7 @@ export class MapComponent {
                                     iconSize: [4, 4],
                                     className: 'mark-container stalker-mark-3',
                                     animate: false,
-                                    iconUrl: '/assets/images/svg/factions/stalkers.svg',
+                                    iconUrl: getAssetUrl('images/svg/factions/stalkers.svg'),
                                     iconSizeInit: [2, 2],
                                     iconAnchor: [0, 0],
                                 }),
@@ -2265,7 +2266,7 @@ export class MapComponent {
                                     iconSize: [4, 4],
                                     className: 'mark-container stalker-mark-3',
                                     animate: false,
-                                    iconUrl: '/assets/images/svg/factions/bandits.svg',
+                                    iconUrl: getAssetUrl('images/svg/factions/bandits.svg'),
                                     iconSizeInit: [2, 2],
                                     iconAnchor: [0, 0],
                                 }),
@@ -2281,7 +2282,7 @@ export class MapComponent {
                                     iconSize: [4, 4],
                                     className: 'mark-container stalker-mark-3',
                                     animate: false,
-                                    iconUrl: '/assets/images/svg/factions/military.svg',
+                                    iconUrl: getAssetUrl('images/svg/factions/military.svg'),
                                     iconSizeInit: [2, 2],
                                     iconAnchor: [0, 0],
                                 }),
@@ -2298,7 +2299,7 @@ export class MapComponent {
                                         iconSize: [4, 4],
                                         className: 'mark-container stalker-mark-2',
                                         animate: false,
-                                        iconUrl: '/assets/images/svg/factions/freedom.svg',
+                                        iconUrl: getAssetUrl('images/svg/factions/freedom.svg'),
                                         iconSizeInit: [2, 2],
                                         iconAnchor: [0, 0],
                                     }),
@@ -2312,7 +2313,7 @@ export class MapComponent {
                                         iconSize: [4, 4],
                                         className: 'mark-container stalker-mark-2',
                                         animate: false,
-                                        iconUrl: '/assets/images/svg/factions/clear-sky.svg',
+                                        iconUrl: getAssetUrl('images/svg/factions/clear-sky.svg'),
                                         iconSizeInit: [2, 2],
                                         iconAnchor: [0, 0],
                                     }),
@@ -2442,7 +2443,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/monsters.svg',
+                iconUrl: getAssetUrl('images/svg/marks/monsters.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -2711,7 +2712,7 @@ export class MapComponent {
                     iconSizeInit: [4, 4],
                     className: 'mark-container stalker-mark-4',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/sub-location.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/sub-location.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 4,
@@ -2726,7 +2727,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/chemical.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/chemical.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2741,7 +2742,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/psi.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/psi.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2756,7 +2757,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/radiation.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/radiation.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2771,7 +2772,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/fire.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/fire.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2786,7 +2787,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/electro.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/electro.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2801,7 +2802,7 @@ export class MapComponent {
                     iconSizeInit: [2, 2],
                     className: 'mark-container stalker-mark-2',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/portal.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/portal.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2816,7 +2817,7 @@ export class MapComponent {
                     iconSizeInit: [1.5, 1.5],
                     className: 'mark-container stalker-mark-1.5',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/mines.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/mines.svg'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 1.5,
@@ -2837,7 +2838,7 @@ export class MapComponent {
                     iconSizeInit: [1, 1],
                     className: 'mark-container stalker-mark',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/stash.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/stash.svg'),
                     iconAnchor: [0, 0],
                 }),
                 keepMapSize: true,
@@ -2853,7 +2854,7 @@ export class MapComponent {
                     iconSizeInit: [1, 1],
                     className: 'mark-container stalker-mark',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/quest-item.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/quest-item.svg'),
                     iconAnchor: [0, 0],
                 }),
                 keepMapSize: true,
@@ -2869,7 +2870,7 @@ export class MapComponent {
                     iconSizeInit: [1, 1],
                     className: 'mark-container stalker-mark',
                     animate: !1,
-                    iconUrl: '/assets/images/svg/marks/stuff.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/stuff.svg'),
                     iconAnchor: [0, 0],
                 }),
                 keepMapSize: true,
@@ -2890,7 +2891,7 @@ export class MapComponent {
                 iconSizeInit: [1, 1],
                 className: 'mark-container stalker-mark',
                 animate: !1,
-                iconUrl: '/assets/images/svg/marks/items.svg',
+                iconUrl: getAssetUrl('images/svg/marks/items.svg'),
                 iconAnchor: [0, 0],
             }),
             keepMapSize: true,
@@ -2910,7 +2911,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/character.svg',
+                iconUrl: getAssetUrl('images/svg/marks/character.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -2927,7 +2928,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/character_dead.svg',
+                iconUrl: getAssetUrl('images/svg/marks/character_dead.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -2944,7 +2945,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/character_quest.svg',
+                iconUrl: getAssetUrl('images/svg/marks/character_quest.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -2966,7 +2967,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/anomaly.svg',
+                iconUrl: getAssetUrl('images/svg/marks/anomaly.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -2981,7 +2982,7 @@ export class MapComponent {
                 iconSize: [12.5, 12.5],
                 className: 'mark-container stalker-mark',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/anomaly_noart.svg',
+                iconUrl: getAssetUrl('images/svg/marks/anomaly_noart.svg'),
                 iconSizeInit: [1, 1],
                 iconAnchor: [0, 0],
             }),
@@ -3002,7 +3003,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/level_changers/level_changer_up.svg',
+                iconUrl: getAssetUrl('images/svg/marks/level_changers/level_changer_up.svg'),
                 iconSizeInit: [2, 2],
                 iconAnchor: [0, 0],
             }),
@@ -3019,7 +3020,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/level_changers/underground_2.svg',
+                iconUrl: getAssetUrl('images/svg/marks/level_changers/underground_2.svg'),
                 iconSizeInit: [1.5, 1.5],
                 iconAnchor: [0, 0],
             }),
@@ -3036,7 +3037,7 @@ export class MapComponent {
                 iconSize: [4, 4],
                 className: 'mark-container stalker-mark-2',
                 animate: false,
-                iconUrl: '/assets/images/svg/marks/level_changers/level_changer_rostok.svg',
+                iconUrl: getAssetUrl('images/svg/marks/level_changers/level_changer_rostok.svg'),
                 iconSizeInit: [4, 2],
                 iconAnchor: [0, 0],
             }),
@@ -3066,7 +3067,7 @@ export class MapComponent {
                         iconSize: [4, 4],
                         className: 'mark-container stalker-mark-2',
                         animate: false,
-                        iconUrl: `/assets/images/svg/marks/level_changers/${src}.svg`,
+                        iconUrl: getAssetUrl(`images/svg/marks/level_changers/${src}.svg`),
                         iconSizeInit: [2, 2],
                         iconAnchor: [0, 0],
                     }),

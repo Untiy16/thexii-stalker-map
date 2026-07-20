@@ -10,6 +10,7 @@ import { ItemTooltipComponent } from '../tooltips/item-tooltip/item-tooltip.comp
 import { TooltipDirective } from '../tooltips/tooltip.directive';
 import { Game } from '../../models/game.model';
 import { HiddenMarker } from '../../models/hidden-marker.model';
+import { getAppUrl } from '../../utils/app-url';
 
 @Component({
     selector: 'app-loot-box-cluster',
@@ -96,7 +97,7 @@ export class LootBoxClusterComponent {
             }
         }
 
-        this.shareUrl = `${window.location.origin}/map/${this.game.uniqueName}?lat=${this.cluster.z}&lng=${this.cluster.x}&type=destroyable-box${this.isUnderground ? `&underground=${this.cluster.locationId}` : ''}`;
+        this.shareUrl = getAppUrl(`/map/${this.game.uniqueName}?lat=${this.cluster.z}&lng=${this.cluster.x}&type=destroyable-box${this.isUnderground ? `&underground=${this.cluster.locationId}` : ''}`);
         
         this.hiddenMarker = new HiddenMarker();
         this.hiddenMarker.game = this.game.uniqueName;

@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 .selected-item-upgrades {
     display: grid;
     grid-template-columns: repeat(3, max-content);
@@ -17,13 +19,13 @@
 }
 
 .upgrade-item-image {
-    background-image: url(/assets/images/mechanic/cop/ui_actor_weapons.png)
+    background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_weapons.png)
 }
 
 .upgrade-item-image.E_STLK,
 .upgrade-item-image.E_HLMET,
 .upgrade-item-image.WP_RPG7 {
-    background-image: url(/assets/images/mechanic/cop/ui_actor_armor.png)
+    background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_armor.png)
 }
 
 .upgrade-item {
@@ -43,20 +45,20 @@
 
     @for $i from 1 through 4 {
         &.ui_actor_upgrades_#{$i} {
-            background-image: url(/assets/images/mechanic/cop/ui_actor_upgrades_#{$i}.png);
+            background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_upgrades_#{$i}.png);
         }
     }
 
     &.ui_actor_upgrades_armor {
-        background-image: url(/assets/images/mechanic/cop/ui_actor_upgrades_armor.png);
+        background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_upgrades_armor.png);
     }
 
     &.ui_actor_upgrades_armor_1 {
-        background-image: url(/assets/images/mechanic/cop/ui_actor_upgrades_armor_1.png);
+        background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_upgrades_armor_1.png);
     }
 
     &.ui_ingame2_common {
-        background-image: url(/assets/images/mechanic/ui_ingame2_common.png);
+        background-image: url(#{$asset-base}images/mechanic/ui_ingame2_common.png);
     }
 }
 
@@ -66,7 +68,7 @@
     left: 3px;
     width: 5px;
     height: 38px;
-    background-image: url(/assets/images/mechanic/cop/ui_actor_upgrades_1.png);
+    background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_upgrades_1.png);
     display: none;
 
     &.upgrade-item-highlight-selected {

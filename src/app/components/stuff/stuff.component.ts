@@ -8,6 +8,7 @@ import { TooltipDirective } from '../tooltips/tooltip.directive';
 import { Game } from '../../models/game.model';
 import { NgClass } from '@angular/common';
 import { HiddenMarker } from '../../models/hidden-marker.model';
+import { getAppUrl } from '../../utils/app-url';
 
 @Component({
     selector: 'app-stuff',
@@ -98,7 +99,7 @@ export class StuffComponent {
             }
         }
 
-        this.shareUrl = `${window.location.origin}/map/${this.game.uniqueName}?lat=${this.stuff.z}&lng=${this.stuff.x}&type=${this.stuffType}${this.isUnderground ? `&underground=${this.stuff.locationId}` : ''}`;
+        this.shareUrl = getAppUrl(`/map/${this.game.uniqueName}?lat=${this.stuff.z}&lng=${this.stuff.x}&type=${this.stuffType}${this.isUnderground ? `&underground=${this.stuff.locationId}` : ''}`);
         this.hiddenMarker = new HiddenMarker();
         this.hiddenMarker.game = this.game.uniqueName;
         this.hiddenMarker.isUnderground = this.isUnderground;

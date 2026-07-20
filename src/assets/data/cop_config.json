@@ -10,7 +10,7 @@
           "id": 1,
           "ableToSearch": true,
           "isMapStaticIcon": true,
-          "imageUrl": "/assets/images/svg/marks/sub-location.svg",
+          "imageUrl": "assets/images/svg/marks/sub-location.svg",
           "anchorSize": [4,4],
           "useCanvasRenderer": true,
           "color": "white"

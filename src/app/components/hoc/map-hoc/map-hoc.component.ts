@@ -22,6 +22,7 @@ import { GuideComponent } from '../guide-component/guide-component';
 import { TraderComponent } from '../trader.component/trader.component';
 import { HocStuffComponent } from '../hoc-stuff/hoc-stuff.component';
 import { Game } from '../../../models/game.model';
+import { getAssetUrl } from '../../../utils/app-url';
 import { L, asStalkerMap, pixelCenter, StalkerCustomLayersControl, StalkerLayerGroup, StalkerMap, StalkerSearchControl } from '../../../leaflet/leaflet-setup';
 
 @Component({
@@ -109,10 +110,10 @@ export class MapHocComponent {
             this.loadLocales(i.lang);
         });
 
-        fetch(`/assets/data/${this.game}/map.json`).then((response) => {
+        fetch(getAssetUrl(`data/${this.game}/map.json`)).then((response) => {
             if (response.ok) {
                 response.json().then((gamedata: MapHoc) => {
-                    fetch(`/assets/data/${this.game}_config.json`)
+                    fetch(getAssetUrl(`data/${this.game}_config.json`))
                         .then((response) => response.json())
                         .then((gameConfig: MapConfig) => {
                             this.loadMap(gamedata, gameConfig);
@@ -267,7 +268,7 @@ export class MapHocComponent {
                     noWrap: true
                 })
             //D:\stalker-map\src\assets\images\s2\tiles\Mip_00\tile_2_0.png
-            let diegeticMap = L.tileLayer('/assets/images/s2/tiles/Mip_0{z}/tile_{y}_{x}.png',
+            let diegeticMap = L.tileLayer(getAssetUrl('images/s2/tiles/Mip_0{z}/tile_{y}_{x}.png'),
                 {
                     tileSize: tileSize * 4,
                     zoomOffset: 0,
@@ -754,7 +755,7 @@ export class MapHocComponent {
                 name: 'EMarkerType::Location',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/s2/Markers/T_LocationOrigin_NotActive_Shadow.png',
+                        getAssetUrl('images/s2/Markers/T_LocationOrigin_NotActive_Shadow.png'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 120
@@ -763,7 +764,7 @@ export class MapHocComponent {
                 name: 'EMarkerType::ArchAnomaly',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/s2/Markers/Texture_Archianomaly_NotActive_General_Shadow.png',
+                        getAssetUrl('images/s2/Markers/Texture_Archianomaly_NotActive_General_Shadow.png'),
                     iconAnchor: [0, 0],
                 }),
                 radius: 10
@@ -772,7 +773,7 @@ export class MapHocComponent {
                 name: 'ESpawnType::Hub',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/s2/Markers/Texture_Camp_NotActive_General_Shadow.png',
+                        getAssetUrl('images/s2/Markers/Texture_Camp_NotActive_General_Shadow.png'),
                     iconAnchor: [0, 0],
                 }),
                 isHub: true,
@@ -782,7 +783,7 @@ export class MapHocComponent {
                 name: 'EMarkerType::Hub',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/s2/Markers/Texture_Camp_NotActive_General_Shadow.png',
+                        getAssetUrl('images/s2/Markers/Texture_Camp_NotActive_General_Shadow.png'),
                     iconAnchor: [0, 0],
                 }),
                 isHub: true,
@@ -792,7 +793,7 @@ export class MapHocComponent {
                 name: 'ESpawnType::LairSpawner',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/svg/marks/smart_terrain_default.svg',
+                        getAssetUrl('images/svg/marks/smart_terrain_default.svg'),
                     iconAnchor: [0, 0],
                 }),
                 isLair: true,
@@ -803,7 +804,7 @@ export class MapHocComponent {
                 name: 'ESpawnType::Shelter',
                 icon: new this.svgIcon({
                     iconUrl:
-                        '/assets/images/svg/marks/shelter.svg',
+                        getAssetUrl('images/svg/marks/shelter.svg'),
                     iconAnchor: [0, 0],
                 }),
                 isShalter: true,
@@ -1038,7 +1039,7 @@ export class MapHocComponent {
             name: 'EMarkerType::Unknown',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/marks/pre-mark.svg',
+                    getAssetUrl('images/svg/marks/pre-mark.svg'),
                 iconAnchor: [0, 0],
             }),
             keepMapSize: true,
@@ -1052,7 +1053,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/marks/monsters.svg',
+                    getAssetUrl('images/svg/marks/monsters.svg'),
                 iconAnchor: [0, 0]
             }),
             isMutantLair: true,
@@ -1065,7 +1066,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/stalkers.svg',
+                    getAssetUrl('images/svg/factions/stalkers.svg'),
                 iconAnchor: [0, 0]
             }),
             isLair: true,
@@ -1078,7 +1079,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/bandits.svg',
+                    getAssetUrl('images/svg/factions/bandits.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1091,7 +1092,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/varta.svg',
+                    getAssetUrl('images/svg/factions/varta.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1104,7 +1105,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/iskra.svg',
+                    getAssetUrl('images/svg/factions/iskra.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1117,7 +1118,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/msop.svg',
+                    getAssetUrl('images/svg/factions/msop.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1130,7 +1131,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/mercs.svg',
+                    getAssetUrl('images/svg/factions/mercs.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1143,7 +1144,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/monolith.svg',
+                    getAssetUrl('images/svg/factions/monolith.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1156,7 +1157,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/freedom.svg',
+                    getAssetUrl('images/svg/factions/freedom.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1169,7 +1170,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/duty.svg',
+                    getAssetUrl('images/svg/factions/duty.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1182,7 +1183,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/corpus.svg',
+                    getAssetUrl('images/svg/factions/corpus.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1195,7 +1196,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/scientists.svg',
+                    getAssetUrl('images/svg/factions/scientists.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1208,7 +1209,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/zombie.svg',
+                    getAssetUrl('images/svg/factions/zombie.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1221,7 +1222,7 @@ export class MapHocComponent {
             name: 'ESpawnType::LairSpawner',
             icon: new this.svgIcon({
                 iconUrl:
-                    '/assets/images/svg/factions/noon.svg',
+                    getAssetUrl('images/svg/factions/noon.svg'),
                 iconAnchor: [0, 0],
             }),
             isLair: true,
@@ -1515,7 +1516,7 @@ export class MapHocComponent {
             {
                 name: 'ESpawnType::PsyAnomaly',
                 icon: new this.svgIcon({
-                    iconUrl: 'assets/images/svg/marks/psi.svg',
+                    iconUrl: getAssetUrl('images/svg/marks/psi.svg'),
                     iconAnchor: [0, 0],
                 }),
             },
@@ -1544,7 +1545,7 @@ export class MapHocComponent {
     private addStuffs(): void {
         let stuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/items-low.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/items-low.svg'),
                 iconAnchor: [0, 0],
                 color: "#ffffff"
             }),
@@ -1552,7 +1553,7 @@ export class MapHocComponent {
         };
         let richStuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/items.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/items.svg'),
                 iconAnchor: [0, 0],
                 color: "#ffffff"
             }),
@@ -1654,7 +1655,7 @@ export class MapHocComponent {
     public addStashes(): void {
         let stuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/items-low.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/items-low.svg'),
                 iconAnchor: [0, 0],
                 color: "#00df07"
             }),
@@ -1663,7 +1664,7 @@ export class MapHocComponent {
 
         let notRandomIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/items.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/items.svg'),
                 iconAnchor: [0, 0],
                 color: "#00df07"
             }),
@@ -1672,7 +1673,7 @@ export class MapHocComponent {
 
         let richStuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/items.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/items.svg'),
                 iconAnchor: [0, 0],
                 color: "#dd2a00"
             }),
@@ -1681,7 +1682,7 @@ export class MapHocComponent {
 
         let deluxtuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/highlight-stahs.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/highlight-stahs.svg'),
                 iconAnchor: [0, 0],
                 color: "#3E9EC6"
             }),
@@ -1690,7 +1691,7 @@ export class MapHocComponent {
 
         let preOrderStuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/highlight-stahs.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/highlight-stahs.svg'),
                 iconAnchor: [0, 0],
                 color: "#F8F22E"
             }),
@@ -1699,7 +1700,7 @@ export class MapHocComponent {
 
         let UltimateStuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/colored/highlight-stahs.svg',
+                iconUrl: getAssetUrl('images/svg/marks/colored/highlight-stahs.svg'),
                 iconAnchor: [0, 0],
                 color: "#ED6819"
             }),
@@ -1883,7 +1884,7 @@ export class MapHocComponent {
             icon: new this.svgIcon({
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/s2/Markers/Texture_Trader_NotActive_General_Shadow.png',
+                iconUrl: getAssetUrl('images/s2/Markers/Texture_Trader_NotActive_General_Shadow.png'),
                 iconAnchor: [0, 0],
                 imageFactor: 2
             }),
@@ -1894,7 +1895,7 @@ export class MapHocComponent {
             icon: new this.svgIcon({
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/s2/Markers/Texture_Medecine_NotActive_General_Shadow.png',
+                iconUrl: getAssetUrl('images/s2/Markers/Texture_Medecine_NotActive_General_Shadow.png'),
                 iconAnchor: [0, 0],
                 imageFactor: 2
             }),
@@ -1971,7 +1972,7 @@ export class MapHocComponent {
             icon: new this.svgIcon({
                 className: 'mark-container stalker-mark-1.5',
                 animate: false,
-                iconUrl: '/assets/images/s2/Markers/Texture_Guide_NotActive_General_Shadow.png',
+                iconUrl: getAssetUrl('images/s2/Markers/Texture_Guide_NotActive_General_Shadow.png'),
                 iconAnchor: [0, 0],
                 imageFactor: 2
             }),
@@ -2029,7 +2030,7 @@ export class MapHocComponent {
     public addArtefactSpawners(): void {
         let stuffIcon = {
             icon: new this.svgIcon({
-                iconUrl: '/assets/images/svg/marks/anomaly.svg',
+                iconUrl: getAssetUrl('images/svg/marks/anomaly.svg'),
                 iconAnchor: [0, 0],
             }),
             keepMapSize: true,
@@ -2305,7 +2306,7 @@ export class MapHocComponent {
     }
 
     private async loadItems(): Promise<void> {
-        await fetch(`/assets/data/${this.game}/items.json`).then((response) => {
+        await fetch(getAssetUrl(`data/${this.game}/items.json`)).then((response) => {
             if (response.ok) {
                 response.json().then((items: Item[]) => {
                     if (items) {
@@ -2347,7 +2348,7 @@ export class MapHocComponent {
 
     private async loadLocales(language: string): Promise<void> {
         await fetch(
-            `/assets/data/${this.game}/${this.translate.currentLang}.json`
+            getAssetUrl(`data/${this.game}/${this.translate.currentLang}.json`)
         ).then((response) => {
             if (response.ok) {
                 response.json().then((locales: any) => {
@@ -2358,7 +2359,7 @@ export class MapHocComponent {
             }
         });
 
-        fetch(`/assets/data/${this.game}/locale_import.json`).then((response) => {
+        fetch(getAssetUrl(`data/${this.game}/locale_import.json`)).then((response) => {
             if (response.ok) {
                 response.json().then((locales: any) => {
                     let games = Object.keys(locales);
@@ -2368,7 +2369,7 @@ export class MapHocComponent {
 
                             if (!(importLocales == null || importLocales.length == 0)) {
                                 fetch(
-                                    `/assets/data/${game}/${this.translate.currentLang}.json`
+                                    getAssetUrl(`data/${game}/${this.translate.currentLang}.json`)
                                 ).then((response) => {
                                     if (response.ok) {
                                         response.json().then((locales: any) => {

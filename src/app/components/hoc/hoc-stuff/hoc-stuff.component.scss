@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 .inventory-item {
   box-sizing: border-box;
   margin: 0;
@@ -21,6 +23,6 @@
 }
 
 .item-attachment {
-  background-image: url(/assets/images/items/attachments.png);
+  background-image: url(#{$asset-base}images/items/attachments.png);
     background-size: calc(var(--inventory-cell-size) * var(--attachment-width-in-cell));
 }

@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 /* You can add global styles to this file, and also import other style files */
 .container-fluid {
   width: 100%;
@@ -152,45 +154,45 @@ input[type=checkbox]+label:before {
 }
 
 .icon-freedom::before {
-  background-image: url(/assets/images/svg/factions/freedom.svg);
+  background-image: url(#{$asset-base}images/svg/factions/freedom.svg);
 }
 
 .icon-bandit::before {
-  background-image: url(/assets/images/svg/factions/bandits.svg);
+  background-image: url(#{$asset-base}images/svg/factions/bandits.svg);
 }
 
 .icon-military::before, .icon-army::before {
-  background-image: url(/assets/images/svg/factions/military.svg);
+  background-image: url(#{$asset-base}images/svg/factions/military.svg);
 }
 
 .icon-killer::before {
-  background-image: url(/assets/images/svg/factions/mercs.svg);
+  background-image: url(#{$asset-base}images/svg/factions/mercs.svg);
 }
 
 .icon-csky::before {
-  background-image: url(/assets/images/svg/factions/clear-sky.svg);
+  background-image: url(#{$asset-base}images/svg/factions/clear-sky.svg);
 }
 
 .icon-duty::before, .icon-dolg::before {
-  background-image: url(/assets/images/svg/factions/duty.svg);
+  background-image: url(#{$asset-base}images/svg/factions/duty.svg);
 }
 
 .icon-undeground-door::before {
-  background-image: url(/assets/images/svg/marks/level_changers/underground_door.svg);
+  background-image: url(#{$asset-base}images/svg/marks/level_changers/underground_door.svg);
 }
 
 .icon-stalker::before, .icon-trader::before {
-  background-image: url(/assets/images/svg/factions/stalkers.svg);
+  background-image: url(#{$asset-base}images/svg/factions/stalkers.svg);
 }
 
 .icon-science::before, .icon-ecolog::before {
-  background-image: url(/assets/images/svg/factions/scientists.svg);
+  background-image: url(#{$asset-base}images/svg/factions/scientists.svg);
 }
 
 .icon-bug::before {
   height: 1rem;
   width: 1rem;
-  background-image: url(/assets/images/svg/interface/bug.svg);
+  background-image: url(#{$asset-base}images/svg/interface/bug.svg);
 }
 
 .inventory {
@@ -281,23 +283,23 @@ input[type=checkbox]+label:before {
   min-height: 100%;
   max-height: 100%;
   object-fit: cover;
-  background-image: url(/assets/images/items/ui_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/ui_icon_equipment.png)
 }
 
 .inventory-item-image.shoc {
-  background-image: url(/assets/images/items/shoc_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/shoc_icon_equipment.png)
 }
 
 .inventory-item-image.cs {
-  background-image: url(/assets/images/items/cs_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/cs_icon_equipment.png)
 }
 
 .inventory-item-image.cop {
-  background-image: url(/assets/images/items/cop_icon_equipment.png)
+  background-image: url(#{$asset-base}images/items/cop_icon_equipment.png)
 }
 
 .inventory-item-image.hoc {
-  background-image: url(/assets/images/items/hoc_icon_equipment.webp);
+  background-image: url(#{$asset-base}images/items/hoc_icon_equipment.webp);
   background-size: calc(var(--inventory-cell-size) * var(--item-width-in-cell));
 }
 
@@ -334,14 +336,14 @@ input[type=checkbox]+label:before {
 }
 
 .inventory-item-upgrade {
-  background-image: url(/assets/images/items/upgrade.svg);
+  background-image: url(#{$asset-base}images/items/upgrade.svg);
   background-repeat: round;
   width: 25px;
   height: 100%;
   opacity: .75;
 
   &.inventory-item-compare {
-    background-image: url(/assets/images/items/compare.svg);
+    background-image: url(#{$asset-base}images/items/compare.svg);
   }
 }
 
@@ -375,15 +377,15 @@ input[type=checkbox]+label:before {
 }
 
 .stalker-avatar.shoc {
-  background-image: url(/assets/images/shoc_npc_unique.png)
+  background-image: url(#{$asset-base}images/shoc_npc_unique.png)
 }
 
 .stalker-avatar.cs {
-  background-image: url(/assets/images/cs_npc_unique.png)
+  background-image: url(#{$asset-base}images/cs_npc_unique.png)
 }
 
 .stalker-avatar.cop {
-  background-image: url(/assets/images/cop_npc_unique.png)
+  background-image: url(#{$asset-base}images/cop_npc_unique.png)
 }
 
 .tooltip-directive {
@@ -403,7 +405,7 @@ app-item-tooltip, app-upgrade-tooltip {
   top: 0;
   left: 0;
   border: 11px solid;
-  border-image: url(/assets/images/svg/interface/map-info-solid.svg) 11 stretch stretch;
+  border-image: url(#{$asset-base}images/svg/interface/map-info-solid.svg) 11 stretch stretch;
   border-image-slice: 11 fill;
   background-size: contain;
   background-color: transparent;
@@ -464,7 +466,7 @@ app-item-tooltip, app-upgrade-tooltip {
 }
 
 .leaflet-control .leaflet-control-slider-container-toggle {
-    background-image: url(/assets/images/svg/interface/cell-size-icon.svg);
+    background-image: url(#{$asset-base}images/svg/interface/cell-size-icon.svg);
     width: 44px;
     height: 44px;
     display: block;
@@ -539,7 +541,7 @@ app-item-tooltip, app-upgrade-tooltip {
   height: 19px;
 
   &.cs {
-    background-image: url(/assets/images/mechanic/ui_ingame2_common.png);
+    background-image: url(#{$asset-base}images/mechanic/ui_ingame2_common.png);
 
     &.ui_wp_propery_01 {
       background-position-x: -78px;
@@ -675,7 +677,7 @@ app-item-tooltip, app-upgrade-tooltip {
   }
 
   &.cop {
-    background-image: url(/assets/images/mechanic/cop/ui_actor_sleep_screen.png);
+    background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_sleep_screen.png);
 
     &.ui_wp_prop_scope_1\.5x {
       background-position-x: -730px;
@@ -1036,11 +1038,11 @@ app-compare {
 }
 
 .upgrade-item-image {
-  background-image: url(/assets/images/mechanic/cop/ui_actor_weapons.png)
+  background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_weapons.png)
 }
 
 .upgrade-item-image.E_STLK,.upgrade-item-image.E_HLMET,.upgrade-item-image.WP_RPG7 {
-  background-image: url(/assets/images/mechanic/cop/ui_actor_armor.png)
+  background-image: url(#{$asset-base}images/mechanic/cop/ui_actor_armor.png)
 }
 
 .game-icon {
@@ -1050,19 +1052,19 @@ app-compare {
   height: 1.5rem;
 
   &.shoc {
-    background-image: url(/assets/images/svg/interface/games/shoc.svg);
+    background-image: url(#{$asset-base}images/svg/interface/games/shoc.svg);
   }
 
   &.cs {
-    background-image: url(/assets/images/svg/interface/games/cs.svg)
+    background-image: url(#{$asset-base}images/svg/interface/games/cs.svg)
   }
 
   &.cop {
-    background-image: url(/assets/images/svg/interface/games/cop.svg)
+    background-image: url(#{$asset-base}images/svg/interface/games/cop.svg)
   }
 
   &.hoc {
-    background-image: url(/assets/images/svg/interface/games/hoc.svg)
+    background-image: url(#{$asset-base}images/svg/interface/games/hoc.svg)
   }
 }
 
@@ -1123,15 +1125,15 @@ app-compare {
         }
 
         .close {
-            background-image: url(/assets/images/svg/interface/icons/close.svg);
+            background-image: url(#{$asset-base}images/svg/interface/icons/close.svg);
         }
 
         .share {
-            background-image: url(/assets/images/svg/interface/icons/share.svg);
+            background-image: url(#{$asset-base}images/svg/interface/icons/share.svg);
         }
 
         .hide {
-            background-image: url(/assets/images/svg/interface/icons/hide.svg);
+            background-image: url(#{$asset-base}images/svg/interface/icons/hide.svg);
             background-position-y: 50%;
         }
     }

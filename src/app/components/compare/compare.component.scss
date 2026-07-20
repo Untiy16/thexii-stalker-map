@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 app-item-upgrades {
   width: 350px;
   height: 500px;
@@ -23,7 +25,7 @@ app-item-upgrades {
     .remove {
       width: 3rem;
       height: 3rem;
-      background-image: url(/assets/images/svg/interface/icons/error.svg);
+      background-image: url(#{$asset-base}images/svg/interface/icons/error.svg);
       background-repeat: no-repeat;
       background-size: contain;
     }

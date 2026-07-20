@@ -1,3 +1,5 @@
+@import 'styles/asset-base';
+
 :host {
     --border-width: 2px;
     --height: 45px;
@@ -136,7 +138,7 @@
 }
 
 .github {
-    background-image: url(/assets/images/svg/interface/github.svg);
+    background-image: url(#{$asset-base}images/svg/interface/github.svg);
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;

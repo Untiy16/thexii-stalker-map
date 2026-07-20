@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:laravel": "node scripts/prepare-asset-base.mjs laravel && ng build --configuration=laravel && node scripts/fix-asset-urls.mjs /stalker-map/ && node scripts/prepare-asset-base.mjs default",
+    "build:laravel-public": "node scripts/prepare-asset-base.mjs laravel-public && ng build --configuration=laravel-public && node scripts/fix-asset-urls.mjs /public/stalker-map/ && node scripts/prepare-asset-base.mjs default",
     "watch": "ng build --watch --configuration development"
   },
   "private": true,

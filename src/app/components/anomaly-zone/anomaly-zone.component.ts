@@ -7,6 +7,7 @@ import { StuffItem } from '../../models/stuff';
 import { HiddenMarker } from '../../models/hidden-marker.model';
 import { TooltipDirective } from '../tooltips/tooltip.directive';
 import { ItemTooltipComponent } from '../tooltips/item-tooltip/item-tooltip.component';
+import { getAppUrl } from '../../utils/app-url';
 
 @Component({
     selector: 'app-anomaly-zone',
@@ -62,7 +63,7 @@ export class AnomalyZoneComponent {
             }
         }
 
-        this.shareUrl = `${window.location.origin}/map/${this.game.uniqueName}?lat=${this.anomalZone.z}&lng=${this.anomalZone.x}&type=anomaly-zone${this.isUnderground ? `&underground=${this.anomalZone.locationId}` : ''}`;
+        this.shareUrl = getAppUrl(`/map/${this.game.uniqueName}?lat=${this.anomalZone.z}&lng=${this.anomalZone.x}&type=anomaly-zone${this.isUnderground ? `&underground=${this.anomalZone.locationId}` : ''}`);
         this.hiddenMarker = HiddenMarker.anomalZone(this.anomalZone, this.game.uniqueName, this.isUnderground);
     }
 }

@@ -1,26 +1,28 @@
+@import 'styles/asset-base';
+
 .stalker-sub-location, .stalker-search-item.sub-location {
-  background: url(/assets/images/svg/marks/sub-location.svg) no-repeat;
+  background: url(#{$asset-base}images/svg/marks/sub-location.svg) no-repeat;
   background-size: contain;
   pointer-events: fill
 }
 
 .stalker-stash, .stalker-search-item.stash {
-  background: url(/assets/images/svg/marks/stash.svg)no-repeat;
+  background: url(#{$asset-base}images/svg/marks/stash.svg)no-repeat;
   background-size: contain
 }
 
 .stalker-stash-quest, .stalker-search-item.quest {
-  background: url(/assets/images/svg/marks/quest-item.svg)no-repeat;
+  background: url(#{$asset-base}images/svg/marks/quest-item.svg)no-repeat;
   background-size: contain
 }
 
 .stalker-stash-items, .stalker-search-item.destroyable-box {
-  background: url(/assets/images/svg/marks/items.svg)no-repeat;
+  background: url(#{$asset-base}images/svg/marks/items.svg)no-repeat;
   background-size: contain
 }
 
 .stalker-stash-stuff, .stalker-search-item.stuff {
-  background: url(/assets/images/svg/marks/stuff.svg)no-repeat;
+  background: url(#{$asset-base}images/svg/marks/stuff.svg)no-repeat;
   background-size: contain
 }
 
@@ -28,102 +30,102 @@
   padding-left: 18px;
 
   &.anomaly-zone {
-    background: url(/assets/images/svg/marks/anomaly.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/anomaly.svg)no-repeat;
     background-size: contain
   }
 
   &.artefact-ways {
-    background: url(/assets/images/svg/marks/artefact-ways.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/artefact-ways.svg)no-repeat;
     background-size: contain
   }
 
   &.radioactive {
-    background: url(/assets/images/svg/marks/radiation.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/radiation.svg)no-repeat;
     background-size: contain
   }
 
   &.acidic {
-    background: url(/assets/images/svg/marks/chemical.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/chemical.svg)no-repeat;
     background-size: contain
   }
 
   &.psychic {
-    background: url(/assets/images/svg/marks/psi.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/psi.svg)no-repeat;
     background-size: contain
   }
 
   &.thermal {
-    background: url(/assets/images/svg/marks/fire.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/fire.svg)no-repeat;
     background-size: contain
   }
 
   &.mines {
-    background: url(/assets/images/svg/marks/mines.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/mines.svg)no-repeat;
     background-size: contain
   }
 
   &.stalkers {
-    background: url(/assets/images/svg/marks/character.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/character.svg)no-repeat;
     background-size: contain
   }
 
   &.monsters {
-    background: url(/assets/images/svg/marks/monsters.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/monsters.svg)no-repeat;
     background-size: contain
   }
 
   &.smart-terrains {
-    background: url(/assets/images/svg/marks/smart_terrain_default.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/smart_terrain_default.svg)no-repeat;
     background-size: contain
   }
 
   &.default {
-    background: url(/assets/images/svg/marks/smart_terrain_default.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/smart_terrain_default.svg)no-repeat;
     background-size: contain
   }
 
   &.resource {
-    background: url(/assets/images/svg/marks/smart_terrain_resource.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/smart_terrain_resource.svg)no-repeat;
     background-size: contain
   }
 
   &.base {
-    background: url(/assets/images/svg/marks/smart_terrain_territory.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/smart_terrain_territory.svg)no-repeat;
     background-size: contain
   }
 
   &.smart-paths {
-    background: url(/assets/images/svg/marks/pre-mark.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/pre-mark.svg)no-repeat;
     background-size: contain
   }
 
   &.anomaly-zone-no-art {
-    background: url(/assets/images/svg/marks/anomaly_noart.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/anomaly_noart.svg)no-repeat;
     background-size: contain
   }
 
   &.teleport {
-    background: url(/assets/images/svg/marks/portal.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/portal.svg)no-repeat;
     background-size: contain
   }
 
   &.traders {
-    background: url(/assets/images/svg/marks/trader.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/trader.svg)no-repeat;
     background-size: contain
   }
 
   &.mechanics {
-    background: url(/assets/images/svg/marks/tech.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/tech.svg)no-repeat;
     background-size: contain
   }
 
   &.level-changers {
-    background: url(/assets/images/svg/marks/level_changers/level_changer_up.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/marks/level_changers/level_changer_up.svg)no-repeat;
     background-size: contain
   }
 
   &.hidden-markers {
-    background: url(/assets/images/svg/interface/icons/error.svg)no-repeat;
+    background: url(#{$asset-base}images/svg/interface/icons/error.svg)no-repeat;
     background-size: contain
   }
 }

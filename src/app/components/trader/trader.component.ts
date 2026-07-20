@@ -13,6 +13,7 @@ import { Game } from '../../models/game.model';
 import Chart from 'chart.js/auto';
 import { TraderSectionBuilderService } from '../../services/trader-section-builder.service';
 import { TraderBestDealService } from '../../services/trader-best-deal.service';
+import { getAppUrl } from '../../utils/app-url';
 import { TraderChartService } from '../../services/trader-chart.service';
 import { TraderItemTileComponent } from './trader-item-tile/trader-item-tile.component';
 
@@ -101,7 +102,7 @@ export class TraderComponent implements OnInit {
   }
 
   copyLink(): void {
-    const link = `${window.location.origin}/map/${this.game.uniqueName}?lat=${this.trader.z}&lng=${this.trader.x}&type=traders`;
+    const link = getAppUrl(`/map/${this.game.uniqueName}?lat=${this.trader.z}&lng=${this.trader.x}&type=traders`);
     navigator.clipboard.writeText(link);
   }
 

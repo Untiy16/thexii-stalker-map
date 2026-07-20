@@ -12,6 +12,7 @@ import { StuffItem } from '../../models/stuff';
 import { InventoryItem } from '../../models/inventory-item.model';
 import { StuffContent } from '../../models/content';
 import { Game } from '../../models/game.model';
+import { getAppUrl, getAssetUrl } from '../../utils/app-url';
 
 @Component({
   selector: 'app-map-content',
@@ -44,7 +45,7 @@ export class MapContentComponent {
   }
 
   public copyLink(x: number, z: number, type: string, isUnderground: boolean, locationId: number): void {
-    let link = `${window.location.origin}/map/${this.game.uniqueName}?lat=${z}&lng=${x}&type=${type}${isUnderground ? `&underground=${locationId}` : ''}`;
+    let link = getAppUrl(`/map/${this.game.uniqueName}?lat=${z}&lng=${x}&type=${type}${isUnderground ? `&underground=${locationId}` : ''}`);
     navigator.clipboard.writeText(link)
   }
 
@@ -57,7 +58,7 @@ export class MapContentComponent {
 
     //this.loadLocales(this.translate.currentLang);
 
-    fetch(`/assets/data/${this.game.uniqueName}/map.json`)
+    fetch(getAssetUrl(`data/${this.game.uniqueName}/map.json`))
       .then((response) => {
         if (response.ok) {
           response.json()
@@ -81,7 +82,7 @@ export class MapContentComponent {
         if (location) {
           view.isUnderground = location.isUnderground;
           view.locaton = location.uniqueName;
-          view.link = `${window.location.origin}/map/${this.game.uniqueName}?lat=${stuff.z}&lng=${stuff.x}&type=${this.stuffTypes[stuff.typeId]}${view.isUnderground ? `&underground=${stuff.locationId}` : ''}`
+          view.link = getAppUrl(`/map/${this.game.uniqueName}?lat=${stuff.z}&lng=${stuff.x}&type=${this.stuffTypes[stuff.typeId]}${view.isUnderground ? `&underground=${stuff.locationId}` : ''}`)
         }
 
         view.items = stuff.items.map(x => this.getStuffItem(x));
@@ -111,7 +112,7 @@ export class MapContentComponent {
   }
 
   private async loadLocales(language: string): Promise<void> {
-    await fetch(`/assets/data/${this.game.uniqueName}/${this.translate.currentLang}.json`)
+    await fetch(getAssetUrl(`data/${this.game.uniqueName}/${this.translate.currentLang}.json`))
       .then((response) => {
         if (response.ok) {
           response.json().then((locales: any) => {
@@ -124,7 +125,7 @@ export class MapContentComponent {
   }
 
   private async loadItems(): Promise<void> {
-    await fetch(`/assets/data/${this.game.uniqueName}/items.json`)
+    await fetch(getAssetUrl(`data/${this.game.uniqueName}/items.json`))
       .then((response) => {
         if (response.ok) {
           response.json()

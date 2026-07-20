@@ -13,6 +13,7 @@ import { MarkerToSearch } from "../../models/marker-to-search.model";
 import { MapComponent } from "../map/map.component";
 import { HiddenMarker } from "../../models/hidden-marker.model";
 import { MapService } from "../../services/map.service";
+import { getAssetUrl } from "../../utils/app-url";
 import { BottomSheetWrapperComponent } from "../bottom-sheet-wrapper/bottom-sheet-wrapper.component";
 import { L, asLatLngBounds, asStalkerLayerGroup, asStalkerMap, findLayerMarker, pixelBounds, pixelCenter, StalkerCustomLayersControl, StalkerLayerGroup, StalkerMap } from '../../leaflet/leaflet-setup';
 
@@ -393,7 +394,7 @@ export class UndergroundComponent {
     }
 
     private addLocation() {
-        let locationImage = `/assets/images/maps/${this.gamedata.uniqueName}/${this.selectedLevel}.png`;
+        let locationImage = getAssetUrl(`images/maps/${this.gamedata.uniqueName}/${this.selectedLevel}.png`);
 
         const locationBounds = pixelBounds(this.location.heightInMeters, this.location.widthInMeters);
 

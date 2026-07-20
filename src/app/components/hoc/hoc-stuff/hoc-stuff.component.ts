@@ -9,6 +9,7 @@ import { ItemTooltipComponent } from '../../tooltips/item-tooltip/item-tooltip.c
 import { MapService } from '../../../services/map.service';
 import { Game } from '../../../models/game.model';
 import { HocInventoryItem } from "../hoc-inventory-item/hoc-inventory-item";
+import { getAppUrl } from '../../../utils/app-url';
 
 @Component({
     selector: 'app-hoc-stuff',
@@ -80,7 +81,7 @@ export class HocStuffComponent {
     }
 
     public copyLink(): void {
-        let link = `${window.location.origin}/map/${this.game.uniqueName}?lat=${this.stuff.z}&lng=${this.stuff.x}&type=${this.stuffType}`;
+        let link = getAppUrl(`/map/${this.game.uniqueName}?lat=${this.stuff.z}&lng=${this.stuff.x}&type=${this.stuffType}`);
         navigator.clipboard.writeText(link)
     }
 
